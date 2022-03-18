@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: climate-gui
+  namespace: {{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+  labels:
+    app: climate-gui
+spec:
+  selector:
+    matchLabels:
+      app: climate-gui
+  template:
+    metadata:
+      labels:
+        app: climate-gui
+    spec:
+      containers:
+        - env:
+            - name: NEXT_PUBLIC_READING_BASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: climate-gui-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                  key: READING_BASE_URI
+          name: climate-gui
+          image: oyvindis/climate-gui
+          imagePullPolicy: Always
+      restartPolicy: Always
