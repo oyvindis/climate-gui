@@ -1,7 +1,18 @@
-import '../styles/globals.css';
+import { AppProps } from 'next/app';
+import React, { FC } from 'react';
+import { ThemeProvider } from 'styled-components';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
+import GlobalStyle from '../styles';
+import { defaultTheme as theme } from '../theme';
 
-export default MyApp;
+const App: FC<AppProps> = ({
+  Component,
+  pageProps: { session, ...pageProps }
+}) => (
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <Component {...pageProps} />
+  </ThemeProvider>
+);
+
+export default App;
