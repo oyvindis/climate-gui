@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { Reading } from '../../../../types';
 import { getReadings } from '../../../../services/api/climate/readings';
+import env from '../../../../env';
+
+const { READING_BASE_URI } = env;
 
 interface Props {}
 
@@ -30,6 +33,7 @@ const Location: NextPage<Props> = () => {
               </div>
             </li>
           ))}
+        <li>{READING_BASE_URI}</li>
       </ul>
     </div>
   );
