@@ -21,6 +21,21 @@ spec:
                 secretKeyRef:
                   name: climate-gui-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
                   key: READING_BASE_URI
+            - name: OKTA_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: climate-gui-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                  key: OKTA_CLIENT_ID
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: climate-gui-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                  key: AUTH_SECRET
+            - name: OKTA_ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: climate-gui-{{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+                  key: OKTA_ISSUER
           name: climate-gui
           image: oyvindis/climate-gui
           imagePullPolicy: Always
