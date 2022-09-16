@@ -1,23 +1,21 @@
-import type { NextPage, GetServerSidePropsResult } from 'next';
+import type { NextPage } from 'next';
+import { useEffect, useState } from 'react';
 
 import { getLocations } from '../../services/api/climate/locations';
 
 import ClimatePageWrapper from '../../components/pages/climate';
 import { Location } from '../../types';
 
-interface Props {
-  locations: Location[];
-}
+interface Props {}
 
-const Climate: NextPage<Props> = ({ locations }) => {
+const Climate: NextPage<Props> = () => {
+  const [locations, setLocations] = useState<Location[]>([]);
+
+  useEffect(() => {
+    getLocations().then(locations => setLocations(locations as Location[]));
+  }, []);
+
   return <ClimatePageWrapper locations={locations} />;
 };
-
-export async function getServerSideProps(): Promise<
-  GetServerSidePropsResult<Props>
-> {
-  const locations = await getLocations() as Location[];
-  return { props: { locations } };
-}
 
 export default Climate;
