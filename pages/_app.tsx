@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app';
+import { SessionProvider } from 'next-auth/react';
 import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
 
@@ -11,12 +12,14 @@ const App: FC<AppProps> = ({
   Component,
   pageProps: { session, ...pageProps }
 }) => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <Root>
-      <Component {...pageProps} />
-    </Root>
-  </ThemeProvider>
+  <SessionProvider session={session}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Root>
+        <Component {...pageProps} />
+      </Root>
+    </ThemeProvider>
+  </SessionProvider>
 );
 
 export default App;
