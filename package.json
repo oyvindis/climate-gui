@@ -9,7 +9,7 @@
     "lint": "next lint --fix"
   },
   "dependencies": {
-    "axios": "^0.26.1",
+    "axios": "^1.0.0",
     "js-base64": "^3.7.2",
     "next": "12.1.0",
     "next-auth": "^4.10.3",
